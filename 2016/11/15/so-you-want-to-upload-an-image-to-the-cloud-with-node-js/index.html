@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>So you want to upload an image to the cloud with Node.js | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="So you want to upload an image to the cloud with Node.js?Maybe you want a small raspberry pi webcam to take timelapse footage and send it to a server every hour because of its small harddrive. Maybe y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="So you want to upload an image to the cloud with Node.js">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="So you want to upload an image to the cloud with Node.js?Maybe you want a small raspberry pi webcam to take timelapse footage and send it to a server every hour because of its small harddrive. Maybe y">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/11/Untitled-drawing1.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/11/azure1.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/11/azure3-1024x367.png">
+<meta property="og:updated_time" content="2017-01-18T01:53:34.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="So you want to upload an image to the cloud with Node.js">
+<meta name="twitter:description" content="So you want to upload an image to the cloud with Node.js?Maybe you want a small raspberry pi webcam to take timelapse footage and send it to a server every hour because of its small harddrive. Maybe y">
+<meta name="twitter:image" content="http://notconfusing.com/wp-content/uploads/2016/11/Untitled-drawing1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-so-you-want-to-upload-an-image-to-the-cloud-with-node-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/" class="article-date">
+  <time datetime="2016-11-16T03:17:06.000Z" itemprop="datePublished">2016-11-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hacking/">Hacking</a>►<a class="article-category-link" href="/categories/Hacking/Research-Notes/">Research Notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      So you want to upload an image to the cloud with Node.js
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="So-you-want-to-upload-an-image-to-the-cloud-with-Node-js"><a href="#So-you-want-to-upload-an-image-to-the-cloud-with-Node-js" class="headerlink" title="So you want to upload an image to the cloud with Node.js?"></a>So you want to upload an image to the cloud with Node.js?</h2><p>Maybe you want a small raspberry pi webcam to take timelapse footage and send it to a server every hour because of its small harddrive. Maybe you want to build a social network swapping images of Lizard People, and your sever can t handle all the image traffic. Maybe you want to back-up your irreplaceable collection of dead-sea scroll fragments – it’s irreplaceable. You  might want to keep around images or files for many different reasons, and having them publicly accessible in the cloud is better than trying to manage them yourself, for storage and network reasons. This is a tutorial about how to do that. In this tutorial we will be building and inspecting a use case for a web-app I’ve been working on in which users can post images of items they want to trade.</p>
+<p>Just focusing on the backend, we’ll be assuming there’s already webpage with a file upload user-interface. What we’ll be doing is creating the API endpoint that images can be uploaded to, but will then turn-around and ask a cloud-strorage provider to hold the image for us. We’ll also make a square thumbnail version of the image and upload those too. Once both of these images (the full-size and the thumbnail) are in the cloud, we’ll return to the web-client a URL of where the images can be found in the cloud.</p>
+<p><img src="http://notconfusing.com/wp-content/uploads/2016/11/Untitled-drawing1.png" alt="Architectural Overview"></p>
+<h2 id="Choices-choices"><a href="#Choices-choices" class="headerlink" title="Choices, choices"></a>Choices, choices</h2><p>Let’s take a moment to justify the technologies we are using. The first is node.js. There’s a Ph.D. student who works at my university researching programming languages who starts all of his presentations with the question: “why on earth does anyone write in node.js?” It’s funny the first few times you hear it, and if you’re like me who fell in love with python, you might be reticent. But there is some justification here, although some of our processing needs to happen synchronously, but a lot doesn’t, so nodeJS’s asynchronous-by-default nature will be useful.</p>
+<p>The next question we have to answer is, which cloud storage provider to use. I investigated a couple of candidates, and eventually settled on using Microsoft’s Azure, because it came with some excellent sample applications and code that made it easy to get off the ground in an hour. It’s not the only one out there though, I also thought about Amazon S3 the popular giant - but its popular enough already. I looked at Google Cloud Services, which does come with node.js wrappers which is nice, but I didn’t see any sample applications so it wasn’t as dev-friendly as it could have been. I also wanted to consider companies that weren’t corporations of sizes I can’t even fathom, so I poked around Rackspace’s promising offerings, but their documentation was written entirely in cURL exmaples, and we’re trying to play this game on easy mode. Lastly, Cloudinary seems like a good service which is more purpose-build for images, not just general storage, and so has a built-in thumbnail API. I wish my colleague had told me about Cloudinary before I’d written this tutorial not after, it may have come out differently.</p>
+<p>One last thing to note is how much these services cost, what I noticed is that their pricing structures were more similar than different. $0.003 per GB of traffic matters to Netflix, not to us for these purposes.</p>
+<table border="0" cellspacing="0"><colgroup span="2" width="85"></colgroup><br><tbody><br><tr><br><td align="left" height="17">Amazon S3</td><br><td align="left">The popular leader in cloud storage. Yawn.</td><br></tr><br><tr><br><td align="left" height="17">Google Cloud Services</td><br><td align="left">Node.js library, no example application</td><br></tr><br><tr><br><td align="left" height="17">Rackspace</td><br><td align="left">Thoughtful company, documentation is cURL only, no node.js library.</td><br></tr><br><tr><br><td align="left" height="17">Azure</td><br><td align="left"> Node.js library and example applications.</td><br></tr><br><tr><br><td align="left" height="17">Cloudinary</td><br><td align="left"> Potentially interesting entrant, which image-focused features.</td><br></tr><br></tbody><br></table>
+
+<h2 id="Set-up"><a href="#Set-up" class="headerlink" title="Set up"></a>Set up</h2><p>For this toturial you’ll need a Microsoft Azure account. They’ll give you $200 free credit to start off, so go sign-up at <a href="http://portal.azure.com" target="_blank" rel="external">http://portal.azure.com/ </a>without entering a credit card, and setup your “Blob” storage.</p>
+<p>[caption id=”attachment_4112” align=”aligncenter” width=”726”]<img src="http://notconfusing.com/wp-content/uploads/2016/11/azure1.png" alt="Make a new Storage Account"> Make a new Storage Account[/caption]</p>
+<p>Remember these credentials for your application. When everything is set up you’ll see your container like this:</p>
+<p>[caption id=”attachment_4113” align=”aligncenter” width=”474”]<img src="http://notconfusing.com/wp-content/uploads/2016/11/azure3-1024x367.png" alt="There can be many containers, which contain blobs. Each blob has a deterministic URL. Note, the Key icon which contains your secret key needed for later on."> There can be many containers, which contain blobs. Each blob has a deterministic URL. Note, the Key icon which contains your secret key needed for later on.[/caption]</p>
+<p>Now we’ll move on to getting our node.js enviorment set up. With the magic of <code>npm</code> this is remarkably easy. In your project folder do</p>
+<p><pre class="EnlighterJSRAW" data-enlighter-language="shell">npm install azure-storage –save</pre><br>As I mentioned Azure’s storage solution not only has a node.js library, but also comes with a nice simple <a href="https://github.com/Azure/azure-sdk-for-node/blob/c98fd8ff9310f688a7ff6a227015876cd1f722ab/examples/ASM/samples/continuationsample.js" target="_blank" rel="external">sample application </a>which I’ll embellish and go over in more detail.</p>
+<h2 id="Breaking-the-Code"><a href="#Breaking-the-Code" class="headerlink" title="Breaking the Code"></a>Breaking the Code</h2><p>We’re ready to look at some code. What you’re about to see is inside an <a href="http://expressjs.com/" target="_blank" rel="external">express application </a>which I won’t cover now. If you’re not familiar with express it’s quite easy to pick up, but for now pay attention to the broad strokes.</p>
+<p><pre class="EnlighterJSRAW">var azure = require(‘azure-storage’);<br>var formidable = require(‘formidable’);<br>//for parsing data that comes with our images<br>var lwip = require(‘lwip’);<br>//to make our thumbnails<br>const storageAccount = ‘youenteredthisatazureportal’<br>const storageAccessKey = ‘alongrandomstringyougetfromazure’<br>const azureEndpoint = ‘<a href="https://OURDOMAIN.blob.core.windows.net/" target="_blank" rel="external">https://OURDOMAIN.blob.core.windows.net/</a>‘<br>const containerName = ‘youenteredthisatazureportal’;</pre></p>
+<p>var blobClient = azure.createBlobService(storageAccount, storageAccessKey);<br>We now have the the blobClient which is an Object that has a method which will accept our image and upload it, keep this in mind. Next we’ll plumb in our API to respond to HTTP POST requests at <code>/uploadhandler</code>.</p>
+<p><pre class="EnlighterJSRAW" data-enlighter-language="null">router.post(‘/uploadhandler’, function (req, res) {<br>  var form = new formidable.IncomingForm();<br>  var itemId = new Date().getTime()<br>  form.parse(req, function (err, fields, files) {<br>      var options = {<br>        contentType: ‘image/jpeg’,<br>        metadata: {fileName: itemId}<br>        }<br>      var imgPath = files.image.path<br>      var machineId = fields.machineId<br>      var userName = fields.userName<br>      makeThumb(imgPath, itemId, machineId, userName, options, res, uploadThumb);<br>      uploadFull(imgPath, itemId, options)<br>  });<br>});</pre><br>In this example we are expecting a <code>form</code>  which contains our image in the <code>files.image</code> attribute, and some other data like <code>machineId</code> and <code>userName</code> which came along for the ride in fields of the form. After that’s all parsed, we are going to make a thumb, and we’re sending it the callback <code>uploadThumb</code> to run afterwards. <code>uploadFull</code> doesn’t need any preprocessing so we can send it on it’s merry way right now, giving it the image path and an <code>itemId</code> which basically serves as a unique-enough-for-now name for our file. We also are giving Azure some clues as to what this data is that we’re sending it in the  <code>options</code> object. For simplicity we’re assuming its a jpeg.</p>
+<p>I bet you’re wondering what those upload functions do?</p>
+<p><pre class="EnlighterJSRAW" data-enlighter-language="null">var uploadFull = function(imgPath, itemId, options){<br>  var fileName = itemId + ‘.jpg’<br>  blobClient.createBlockBlobFromLocalFile(containerName, fileName, imgPath, options, function (error) {<br>    if (error != null) {<br>      console.log(‘Azure Full Error: ‘, error)<br>    } else {<br>      console.log(‘Azure Full Success’)<br>    }<br>  });<br>}</pre><br><code>uploadFull</code> is going take our image file and plug it into the blobClient’s <code>createBlockBlobFromLocalFile</code> method. It takes a callback to know how to handle errors. Actually this a weak point of Azure that I’ll cover later, about why what arguments passed to this callback are insufficient. But lets take a moment here some magic happened. blobClient is abstracting away a lot of HTTP-based complexity for us–thanks Azure SDK.</p>
+<p>Now let’s see how to make make a square thumbnail out of our image, and at the same time uncover a gripe I have about azure’s SDK.</p>
+<p><pre class="EnlighterJSRAW" data-enlighter-language="null">var makeThumb = function(imgPath, itemId, machineId, userName, options, res, callback){<br>  lwip.open(imgPath, ‘jpg’, function(err, image){<br>    image.cover(320, 320, function(err, image){<br>      image.toBuffer(‘jpg’, function(err, buffer){<br>        callback(buffer, itemId, machineId, userName, options, res)<br>      });<br>    });<br>  });<br>};</pre><br>We use the aptly named <a href="https://github.com/EyalAr/lwip" target="_blank" rel="external">“LightWeight Image Processing” library </a>, to make a 320x320 pixel thumbnail. There is actually a single call that will do this in <code>image.cover</code> . But notice that we passed in a string representing a path and what we got back was a buffer. We could have saved the image as a file, but what’s the point in cloud upload if you’re going to save the files locally?</p>
+<p>At this point we have an image as a buffer and we want to push this to Azure too.</p>
+<p><pre class="EnlighterJSRAW" data-enlighter-language="null">var uploadThumb = function(buffer, itemId, machineId, userName, options, res){<br>  var fileName = itemId + ‘_thumb.jpg’<br>  blobClient.createBlockBlobFromText(containerName, fileName, buffer, options, function (error) {<br>    if (error != null) {<br>      console.log(‘Azure Thumb Error: ‘, error)<br>      res.send({sucess:false})<br>    } else {<br>      console.log(‘Azure Thumb Success’)<br>      anItem = {itemid: itemId,<br>               machineid:machineId,<br>               label:’Unlabeled’,<br>               username:userName<br>               thumbURL:azureEndpoint+fileName}<br>      res.send({success:true, item:anItem});<br>    }<br>  });<br>};</pre><br>Luckily blobClient has another method <code>createBlockBlobFromText</code> which can handle this buffer and work its magic again. Finally if we get success back from the thumbnail upload, we can tell that <code>res</code> response object we’ve been passing around to send some metadata back to the client, so they can know what happened to their image upload. They can use the <code>thumbURL</code> attribute to know where to look for a thumbnail online.  And we’re done. QED.</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>Azure’s SDK made our image uploading easy, but with close analysis there is a some room for improvement. The first thing to notice, which is mentioned earlier is that the callback that the blobClient methods require is one that takes <code>err</code> as its only argument. I would feel better about my life is they would also send back some data about where the blob got stored. It’s true that you can piece it together because it _should _be at <code>azureEndpoint+fileName</code>, but I would have more (ahem) piece of mind if it returned this URL to me.</p>
+<p>The real annoyance is that blobClient has two separate methods for dealing with file paths and text buffers. One method that could either infer these two cases, or provide a specifier as an optional argument makes more sense to me. If it were so, it would allow us more easily to write higher-level functions using the blobClient for many different operations.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>I hope you learned to node, to upload, and to Azure for great good.  This sketch walked us through making an account with Azure and then linking in the Azure SDK with Express. They have many good <a href="https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage" target="_blank" rel="external">resources themselves at Microsoft Developer Network</a>. Without confusion, signing off.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/" data-id="ciy2b27in004jsmpdcbdlwp2c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/03/wikidata-human-gender-indicators-in-the-news/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Wikidata Human Gender Indicators in the News
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/08/for-harry-and-carie-on-their-wedding-day/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">For Harry and Carie on their Wedding Day</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/">Essays</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/Math/">Math</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/PhD/">PhD</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Podcasts/">Podcasts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/">Iron Blogging</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Math/">Math</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/conference/">conference</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">February 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/03/wikidata-human-gender-indicators-in-the-news/">Wikidata Human Gender Indicators in the News</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/">So you want to upload an image to the cloud with Node.js</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/08/for-harry-and-carie-on-their-wedding-day/">For Harry and Carie on their Wedding Day</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/25/machine-learning-in-3rd-grade/">Machine Learning in 3rd Grade</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/suggestions-of-fake-profiles-in-couchsurfing/">Suggestions of Fake Profiles in Couchsurfing</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

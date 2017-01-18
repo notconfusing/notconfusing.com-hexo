@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;nbsp;
+This is my final project from my Machine Learning course this past semester. My collaborators and I attempted to find out when, and why users at English Wikipedia’s article for deletion forum,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process">
+<meta property="og:url" content="http://yoursite.com/2016/01/04/against-the-grain-influencing-factors-of-opinion-change-in-wikipedias-article-for-deletion-process/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;nbsp;
+This is my final project from my Machine Learning course this past semester. My collaborators and I attempted to find out when, and why users at English Wikipedia’s article for deletion forum,">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image01-1024x773.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image00.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image05.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image02.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image03.png">
+<meta property="og:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image04.png">
+<meta property="og:updated_time" content="2017-01-18T01:53:34.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process">
+<meta name="twitter:description" content="&amp;nbsp;
+This is my final project from my Machine Learning course this past semester. My collaborators and I attempted to find out when, and why users at English Wikipedia’s article for deletion forum,">
+<meta name="twitter:image" content="http://notconfusing.com/wp-content/uploads/2016/01/image01-1024x773.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-against-the-grain-influencing-factors-of-opinion-change-in-wikipedias-article-for-deletion-process" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/04/against-the-grain-influencing-factors-of-opinion-change-in-wikipedias-article-for-deletion-process/" class="article-date">
+  <time datetime="2016-01-05T02:25:13.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lesser-Thoughts/">Lesser Thoughts</a>►<a class="article-category-link" href="/categories/Lesser-Thoughts/PhD/">PhD</a>►<a class="article-category-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/">Research Notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<p>This is my final project from my Machine Learning course this past semester. My collaborators and I attempted to find out when, and why users at English Wikipedia’s <em>article for deletion</em> forum, voted against their tendencies. That is, what makes an “deletionist” vote “keep” and when an “inclusionist” votes “delete”? In the end we found that basic machine learning techniques could not perform much better than random, but the intelligence that did emerge came from using information about group herding behaviour, and appeals to the local bureaucratic process.</p>
+<h1 id="Against-the-Grain-Influencing-Factors-of-Opinion-Change-in-Wikipedia’s-Article-for-Deletion-Process"><a href="#Against-the-Grain-Influencing-Factors-of-Opinion-Change-in-Wikipedia’s-Article-for-Deletion-Process" class="headerlink" title="Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process"></a><a name="h.9mxgjz5msn67"></a><span class="c22">Against the Grain: Influencing Factors of Opinion Change in Wikipedia’s Article for Deletion Process</span></h1><h2 id="Zhiyi-Li-Cheng-Peng-and-Max-Klein"><a href="#Zhiyi-Li-Cheng-Peng-and-Max-Klein" class="headerlink" title="Zhiyi Li, Cheng Peng, and Max Klein"></a><a name="h.9mxgjz5msn67"></a><span class="c22">Zhiyi Li, Cheng Peng, and Max Klein</span></h2><p></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a name="h.32keha5utgqx"></a>Introduction</h1><p>On 1 November 2015, English Wikipedia hit 5,000,000 articles; but while article creation is much celebrated, deleting an article is a lesser known process. Article for Deletion (AfD) is the forum where users discuss, make arguments about and and vote on articles’ inclusion in Wikipedia. A final decision is made by a more experienced user, based on the “consensus” of the debate. Over the years AfD has become a highly cultural process which has been likened to a playground game where children gather piles of leaves and are then judged for their raking ability (Baker).</p>
+<p>Indeed, there are two groups at AfD that have statistically significant homogeneous voting patterns - the <span class="c15">inclusionists</span> and <span class="c15">deletionists</span> (Taborelli and Ciampaglia). Those groups argue sometimes over whether an article is encyclopedic in general, but also over whether an article fits Wikipedia’s unique policies (Geiger and Ford). Corroborating this Schneider et al. found that “acceptable arguments [at AfD] demonstrate knowledge of policies and community values”.</p>
+<p>With the understanding that the large-scale dynamics at AfD are creating two camps of voters, and set of acceptable arguments, we ask what’s happening when users change their minds?</p>
+<p>[caption id=”attachment_3964” align=”aligncenter” width=”474”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image01-1024x773.png" alt="Figure 1: Anatomy of a deletion debate."> Figure 1: Anatomy of a deletion debate.[/caption]</p>
+<p><span class="c27">RQ: Can we predict when people will vote against their tendencies at AfD, and what factors are involved?</span></p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a><a name="h.4js1rbo8u0h2"></a>Method</h1><p>Methodologies of computer mediated group decision has been studied for a long time.  A decision-making group can benefit from pooling member’s information (<span class="c2">Stasser and William</span>). It can be viewed as a dynamic process that people make persuasions via information changes and rational arguments (<span class="c2">Herrera and Herrera-Viedma</span>). Therefore, we borrowed a well studied consensus model (see Appendix Figure 3), which uses the current consensus stage and the individual’s distance to social opinions to inform feature extraction from our collected dataset.</p>
+<h2 id="Dataset-Descriptive-Statistics"><a href="#Dataset-Descriptive-Statistics" class="headerlink" title="Dataset Descriptive Statistics"></a><a name="h.ppxxheo3mylg"></a>Dataset Descriptive Statistics</h2><p>Our data comes from publicly accessible historical Wikipedia pages from 2005 to 2011, collected by Prof. Haiyi Zhu. It contains records of 23996112 votes in <span class="c21">363,201</span> deletion discussions between 81,112 editors. Appendix Figure 4 (a) is the distribution on number of participants versus the voting counts for delete and keep respectively. In order to get a clear signal we excluded the voters who participated less than 100 times in the AFD discussion, in which case 1,237,140 voting records remain, with <span class="c21">13,225 </span><span class="c21">editors on </span><span class="c21">363,104 articles</span>. As for the filtered records, a voter’s behavior is examined after their initial 100<span class="c21"> votes. Appendix </span><span class="c21">Figure 4(b)</span><span class="c21"> is the distribution on number of participants versus the voting counts for delete and keep respectively after filtering. Through this operation, the population sample falls into a smoother normal distribution. We believe the processed sample is more suitable for analysis because it represents that an equilibrium stage is reached for each voter as we assumed. </span></p>
+<h2 id="Data-Extraction"><a href="#Data-Extraction" class="headerlink" title="Data Extraction"></a><a name="h.ygg56sacdgo4"></a>Data Extraction</h2><p>In preprocessing, we computed 1578 features for modeling. The features fall into two categories, 12 are descriptive features about the general discussion, like how conversation span, and number of participants (see Appendix Table 2 for complete details). The remaining features are the existence of a Wikipedia policy occurring in the discussion before the editor writes their comment. A Wikipedia Policy is a community practice codified into a Wiki page that is in a special namespace (whose name is the “Wikipedia” namespace). We filtered these policies out by searching for all links in the discussion text and then filtering on that special namespace. We then performed stemming, and redirect following, so that <span class="c15">Wikipedia:Notability (People)</span>. <span class="c15">Wikipedia:Notability (People)#Additional criteria</span>, and <span class="c15">WP:BIO</span> all are aggregated as the same policy. Since we found more than 1500 mentioned policies, but very few mentioned in any comment, we converted our data in a CSR-sparse matrix, otherwise our data did not fit into 8gb of memory.</p>
+<p>As for our target variable, is <span class="c15">vote likelihood</span>, the probability<span class="c21">2</span> that an editor would make the current vote, based on their voting history. If a editor votes keep and their voting history is 75 keep / 25 delete, their <span class="c15">vote likelihood is 0.75</span>.</p>
+<h2 id="Learning-Algorithms"><a href="#Learning-Algorithms" class="headerlink" title="Learning Algorithms"></a><a name="h.9lskoti89an6"></a>Learning Algorithms</h2><p><span class="c23">R</span><span class="c23">egression</span></p>
+<p>The studied target is the voting likelihood , which is a continuous variable, and could be influenced by the other features stated above. Therefore, linear regression method is used to map all other features to the voting likelihood. The other features are linearly combined to predict the voting likelihood.</p>
+<p>The next method we implemented is the logistic regression. Since we extracted the voters included in the data set participated more than 100 times, their behavior is considered stable based on Figure 4. Therefore, the two different classes that are split by 0.5 can be considered deletionists and inclusionists. The l2 norm is used to compute the penalty while the tolerance is 0.0001.</p>
+<p><span class="c23">Classification</span></p>
+<p>Since the voting likelihood is a continuous variable, in order to perform classification we split them into two different classes giving the threshold as 0.5.The class prior distributions is approximately 64% voting with history (vote likelihood &gt; 0.5) 36% voting against history (vote likelihood ≤ 0.5). Therefore, the following classification error rates should be compared with the 36% baseline a random classifier would perform.</p>
+<p><span class="c19">Adaboost</span></p>
+<p>The adaboost classifier is used where each base tree has 2 layers with a total of 500 trees. The learning rate is set to be 1. After calibration in Figure 3, we found the lower the learning rate, the lower the error rate.</p>
+<p><span class="c19">Gradient Boost</span></p>
+<p>We decided to run on 50% subsample of the total data for training since the error rate does not change significantly. Each base tree is also a 2 layers with a total of 500 trees. The learning rate is set to be 1.</p>
+<h3 id="Random-Forest"><a href="#Random-Forest" class="headerlink" title="Random Forest "></a><a name="h.mzsazrts2qe5"></a><span class="c23">Random Forest </span></h3><p>We decided to execute random forest in order to conduct a feature selection process to show which were the most important features. Our forest size was 500 trees, each of depth 2, and selecting from 20 random features. We conducted this exercise three times to determine, how stable our data was under this process.</p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a><a name="h.tpxcbp9vc01t"></a>Results</h1><p>The results of the linear regression prediction is shown in Figure 4. The increasing black line is the theoretical line while the blue dots are the actual predicted value. As seen in the figure, linear regression’s result indicated nearly no predictive power over the entire data sets. Therefore, we decided to change the continuous variable regression problem into a binary class classification problem, whereas the different methods and results are shown below:</p>
+<pre><code>Table: Classification error rate and performance speed on Dell E7250 laptop.
+</code></pre><p><a href="#"></a><a href="#"></a></p>
+<table class="c11" cellspacing="0" cellpadding="0"><br><tbody><br><tr class="c24"><br><td class="c5" colspan="1" rowspan="1"></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Error Rate</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Performance (seconds)</span><br><br></td><br></tr><br><tr class="c24"><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Logistic Regression</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">34.3%</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">120</span><br><br></td><br></tr><br><tr class="c24"><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Adaboost</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">32.6%</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">180</span><br><br></td><br></tr><br><tr class="c24"><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Gradient Boost</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">32.5%</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">30</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">Random Forest</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">33.12%</span><br><br></td><br><td class="c5" colspan="1" rowspan="1"><br><br><span class="c7">180</span><br><br></td><br></tr><br></tbody><br></table>
+
+<h1 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a><a name="h.gj4lisy01h86"></a>Discussion</h1><h2 id="Accuracy-in-prediction"><a href="#Accuracy-in-prediction" class="headerlink" title="Accuracy in prediction"></a><a name="h.k8qqop2t3cdg"></a>Accuracy in prediction</h2><p>Based on the class priors, a random guessing algorithm’s error rate will be 36%. Therefore, we use that number to evaluate our approaches. The best prediction according to the tables is 32% error rate which is only slightly better than random. The rest algorithms dwell around 36% error rate. This means that among all the features, none of them have significant predictive power to predict the changes of voters’ voting behavior. Logistic regression method produces 0.05% training error rate while the test error rate is nearly 36%. We suspect this behavior is a result of overfitting the datasets.</p>
+<p>Although the overall predictive power is low, from random forest method, we are still able to recover the baseline test-error, and extract the top important features that act as a weak learners.</p>
+<p>[caption id=”attachment_3963” align=”alignnone” width=”380”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image00.png" alt="Figure 2: Top 20 most important features from Random Forest."> Figure 2: Top 20 most important features from Random Forest.[/caption]</p>
+<h2 id="Important-features"><a href="#Important-features" class="headerlink" title="Important features"></a><a name="h.hr4txcip3f59"></a>Important features</h2><p>We ran our random forest model 3 times which had a consistent error rate at 36.4%.  Running the algorithm 3 times did produce some jitter of the top 20 important features, but some features appeared consistently between runs (see table 1). We find that many of our non-policy features were consistently important in prediction.</p>
+<p>In particular many temporal features were important, for instance that <span class="c15">conversation span</span> is important means that people change their opinions change more due to more conversation. Additionally <span class="c15">listing from first observation </span>is important so conversation happening at later dates have are less likely to have editors changing their minds.</p>
+<p>Other important features show “herding” dynamics as was found in (Taborelli and Ciampaglia). All of <span class="c15">voters ahead,</span> <span class="c15">keep ahead. </span>and <span class="c15">consensus agreed</span> are important and this can be interpreted as that many people voting before will influence a voter to vote against their tendency. Specifically <span class="c15">keep ahead</span> means that if many people vote keep beforehand, a deletionist is likely to vote keep against their tendency. <span class="c15">Consensus agreed </span>means that a user voted in the same direction as the final decision, so this feature being important quite explicitly shows herding mentality.</p>
+<p>In terms of policies that were consistently important we find many self-referential policies, that illustrate the importance of internal process. Firstly navel-gazing policies such as <span class="c15">Wikipedia:Articles for deletion, Wikipedia:Deletion process, Wikipedia:Do not disrupt Wikipedia to illustrate a point </span>and <span class="c15">Wikipedia:Non-admin </span><span class="c15">closure,</span> show that editors seeing appeals of AfD process will likely vote against their tendencies. We can call this the <span class="c15">policy wonk </span>effect, and it has been shown before in Schneider et al. “Newcomers are particularly likely to use certain common, but problematic, arguments, which are enshrined in policy and in essays such as Arguments to Avoid.”</p>
+<p>Other features that showed important influence were notability guidelines:<span class="c15"> Wikipedia:Notability </span>[and it’s cousins],<span class="c15"> </span>and<span class="c15"> Wikipedia:Biographies of living persons. </span>Previous research has shown that the <span class="c15">notability </span>policies in specific are being increasingly cited at AfD (Lam and Reidl). Biography of Living persons is an especially instructive case, because these biographies have to be exceptionally conservative compared to Wikipedia’s regular standard due to United States defamation laws and legal liability of the Wikimedia Foundation. Therefore that people would change their standard voting behaviour in this sensitive area is unsurprising.</p>
+<h1 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a><a name="h.38laqgqtxkpj"></a>Limitations</h1><p>We only used the 100 votes or more for analysis and the converting threshold is set as 0.5. Yet this does not guarantee an absolute decision shift, for instance an only 49% likely vote.  A better algorithm for likelihood calculation can be adopted. For example, we can declare a voter’s equilibrium stage is reached  once his or her voting likelihood changes restricts in a small changing range for N consecutive votes rather than a fixed number.</p>
+<p>Psychological effects in group discussion is not quantifiable in our model. One missing impacting factor is the choice supportive bias of individuals. It states that there <span class="c9">is the tendency to retroactively ascribe positive attributes to an option one prefered. For example, when a person has preference on A over B, they are likely to downplay the faults of option A while amplifying those of option B.</span> Another limitation is the group bias, where irrational actions that is forbidden by an individual will be taken by when he/her is in a group.Yet, our current data does not have information to measure these effects. Since many temporal features seemed to be important, it would be good to investigate time-series based learning, as well.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a><a name="h.sptb0qammw61"></a>References</h1><p>Schneider, Jodi et al. “Arguments About Deletion: How Experience Improves the Acceptability of Arguments in Ad-Hoc Online Task Groups.” Proceedings of the 2013 Conference on Computer Supported Cooperative Work. New York, NY, USA: ACM, 2013. 1069–1080. ACM Digital Library. Web. 12 Dec. 2015. CSCW ’13.</p>
+<p>Baker, Nicholson. “The Charms of Wikipedia.” The New York Review of Books 20 Mar. 2008. The New York Review of Books. Web. 7 Oct. 2015.</p>
+<p>Taraborelli, D., and G.L. Ciampaglia. “Beyond Notability. Collective Deliberation on Content Inclusion in Wikipedia.” 2010 Fourth IEEE International Conference on Self-Adaptive and Self-Organizing Systems Workshop (SASOW). N.p., 2010. 122–125. IEEE Xplore. Web.</p>
+<p>Geiger, R. Stuart, and Heather Ford. “Participation in Wikipedia’s Article Deletion Processes.” Proceedings of the 7th International Symposium on Wikis and Open Collaboration. New York, NY, USA: ACM, 2011. 201–202. ACM Digital Library. Web. 7 Oct. 2015. WikiSym ’11.</p>
+<p>Lam, Shyong (tony K., and John Riedl. Is Wikipedia Growing a Longer Tail? N.p. Print.</p>
+<p><span class="c2">Stasser, Garold, and William Titus. “Pooling of unshared information in group decision making: Biased information sampling during discussion.” </span><span class="c2 c15">Journal of personality and social psychology</span><span class="c2"> 48, no. 6 (1985): 1467.</span></p>
+<p><span class="c2">H</span><span class="c2">errera, F., and E. Herrera-Viedma. “A model of consensus in group decision making under linguistic assessments.” </span><span class="c2 c15">Fuzzy sets and Systems</span><span class="c2"> 78, no. 1 (1996): 73-87.</span></p>
+<h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a><a name="h.hva6i7r5s8j8"></a>Appendix</h1><p>[caption id=”attachment_3968” align=”aligncenter” width=”983”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image05.png" alt=""> Appendix Fig 1. Group Decision Making[/caption]</p>
+<p>[caption id=”attachment_3965” align=”aligncenter” width=”928”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image02.png" alt="Figure 2\. Histograms of Users"> Figure 2. Histograms of Users’ “Delete” and “Keep” Frequencies, by Minimum (a) 5, (b) 100 votes.[/caption]</p>
+<p>[caption id=”attachment_3966” align=”aligncenter” width=”600”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image03.png" alt="Figure 3\. Log of learning rate vs error for adaboost classifier."> Figure 3. Log of learning rate vs error for adaboost classifier.[/caption]</p>
+<p>[caption id=”attachment_3967” align=”aligncenter” width=”397”]<img src="http://notconfusing.com/wp-content/uploads/2016/01/image04.png" alt="Figure 4: The linear regression prediction for the voting likelihood (The black line is the theoretical fit)."> Figure 4: The linear regression prediction for the voting likelihood (The black line is the theoretical fit).[/caption]</p>
+<p>&nbsp;</p>
+<p>Table 1. Top 20 features from Random Forest over 3 runs.</p>
+<p><a href="#"></a><a href="#"></a></p>
+<table class="c11" cellspacing="0" cellpadding="0"><br><tbody><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c12">Features appearing in all Random Forest Runs</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c12">Features appearing in 2 of 3 Random Forest Runs</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">consensus_agreed</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Arguments to avoid on discussion pages</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">conversation_span</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Article size</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">delete_flag</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Deletion policy</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">final_or_not</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Esperanza</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">keep_ahead</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Notability (events)</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">keep_flag</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Notability (web)</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">listing_from_first_obs</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:VAIN</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">no_policy_mentioned</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Verifiability</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">voter_ahead</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c14">Wikipedia:Wikipedia is not for things made up one day</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Articles for deletion</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Biographies of living persons</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Deletion process</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Do not disrupt Wikipedia to illustrate a point</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Non-admin closure</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br><tr class="c4"><br><td class="c1" colspan="1" rowspan="1"><br><br><span class="c10">Wikipedia:Notability</span><br><br></td><br><td class="c1" colspan="1" rowspan="1"></td><br></tr><br></tbody><br></table>
+
+<p>Table 2. Descriptive Features</p>
+<p><a href="#"></a><a href="#"></a></p>
+<table class="c11" cellspacing="0" cellpadding="0"><br><tbody><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Feature</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">Description</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Time Influence (listing from first obs)</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable is calculated by the difference between article’s listing days and</span><br><br><span class="c12">the very first observation date within dataset, which is the 2005/12/07 for our experiment.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Conversatio Span</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This indicates how long the deletion conversation last.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Participant Count</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">The total number of participants in the conversation</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Keep Flag</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable identifies whether the final decision for the article is keep or not.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Delete Flag</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable identifies whether the final decision for the article is delete or not.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Consensus Agreed</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable indicates whether final decision matches the user’s vote.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Final decision maker flag</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable indicates whether this editor is final decision.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Voters Ahead</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable counts how many people have voted before the very person to write comment during the conversation.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Delete Ahead</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable counts the number delete comment a voter exposed to before he/she writes a comment.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Keep Ahead</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">This variable counts the number keep comment a voter exposed to before</span><br><br><span class="c12">he/she writes a comment.</span><br><br></td><br></tr><br><tr class="c4"><br><td class="c6" colspan="1" rowspan="1"><br><br><span class="c12">Mentioned Policies</span><br><br></td><br><td class="c3" colspan="1" rowspan="1"><br><br><span class="c12">From the argument content, we extracted links to Wikipedia policy pages.</span><br><br></td><br></tr><br></tbody><br></table>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/01/04/against-the-grain-influencing-factors-of-opinion-change-in-wikipedias-article-for-deletion-process/" data-id="ciy2b27fy001fsmpdjpv634oh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/26/dried-and-true/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Dried and True
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/06/wigi-update-results-from-usability-testing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WIGI Update: Results from Usability Testing</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/">Essays</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/Math/">Math</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/PhD/">PhD</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Podcasts/">Podcasts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/">Iron Blogging</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Math/">Math</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/conference/">conference</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">February 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/03/wikidata-human-gender-indicators-in-the-news/">Wikidata Human Gender Indicators in the News</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/">So you want to upload an image to the cloud with Node.js</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/08/for-harry-and-carie-on-their-wedding-day/">For Harry and Carie on their Wedding Day</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/25/machine-learning-in-3rd-grade/">Machine Learning in 3rd Grade</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/suggestions-of-fake-profiles-in-couchsurfing/">Suggestions of Fake Profiles in Couchsurfing</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

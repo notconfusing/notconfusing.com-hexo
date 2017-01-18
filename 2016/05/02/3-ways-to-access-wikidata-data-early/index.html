@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>3 Ways To Access Wikidata Data Until It Can Be Done Properly | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Note: This post is quite old. In fact Wikidata can now be accessed “properly” via the Wikidata Query Service (WDQS). However the techniques outlined below still have their advantages.
+The inaugural Wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3 Ways To Access Wikidata Data Until It Can Be Done Properly">
+<meta property="og:url" content="http://yoursite.com/2016/05/02/3-ways-to-access-wikidata-data-early/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Note: This post is quite old. In fact Wikidata can now be accessed “properly” via the Wikidata Query Service (WDQS). However the techniques outlined below still have their advantages.
+The inaugural Wi">
+<meta property="og:updated_time" content="2017-01-18T01:53:34.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Ways To Access Wikidata Data Until It Can Be Done Properly">
+<meta name="twitter:description" content="Note: This post is quite old. In fact Wikidata can now be accessed “properly” via the Wikidata Query Service (WDQS). However the techniques outlined below still have their advantages.
+The inaugural Wi">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-3-ways-to-access-wikidata-data-early" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/02/3-ways-to-access-wikidata-data-early/" class="article-date">
+  <time datetime="2016-05-02T07:40:11.000Z" itemprop="datePublished">2016-05-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>►<a class="article-category-link" href="/categories/blog/Lesser-Thoughts/">Lesser Thoughts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      3 Ways To Access Wikidata Data Until It Can Be Done Properly
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Note: This post is quite old. In fact Wikidata can now be accessed “properly” via the <a href="https://query.wikidata.org/" target="_blank" rel="external">Wikidata Query Service (WDQS). </a>However the techniques outlined below still have their advantages.</p>
+<p>The inaugural <a href="https://meta.wikimedia.org/wiki/Research:Labs2/Hackathons/November_9th,_2013" target="_blank" rel="external">Wiki Research Hackathon </a> went very well, and I’m affirmed that I feel best when I’m conducting Wiki Research. I was asked to give one of the tech talks of the day about accessing Wikidata data programmatically. Here is an outline of the talk</p>
+<h3 id="Purpose"><a href="#Purpose" class="headerlink" title="Purpose:"></a>Purpose:</h3><p>We’ll be viewing Wikidata as file in its own right for research, not as it’s canonical use case of being used in various Wikipedias.</p>
+<h3 id="Native-format"><a href="#Native-format" class="headerlink" title="Native format:"></a>Native format:</h3><p>Wikidata is a mostly standard Mediawiki instance except that pages don’t store “Wikitext”, they store JSON blobs. (If you want to understand more about this abstraction, see then <a href="http://www.mediawiki.org/wiki/Manual:ContentHandler" target="_blank" rel="external">ContentHandler</a>).</p>
+<h3 id="Structure-of-a-Wikidata-Item"><a href="#Structure-of-a-Wikidata-Item" class="headerlink" title="Structure of a Wikidata Item:"></a>Structure of a Wikidata Item:</h3><p>Main entry point of any Wikidata item is a JSON dictionary, that has this form:</p>
+<pre>{“labels”: by-language dictionary</pre>
+<pre>“descriptions”: by-language dictionary</pre>
+<pre>“aliases”: by-language dictionary</pre>
+<pre>“claims”: list of property and values</pre>
+<pre>“sitelinks”: by-language dictionary}</pre>
+&nbsp;
+
+### 3 Ways To Access Wikidata:
+
+Whether your more comfortable in object-oriented python, parsing large text files, or munging linked data, there is something for you.
+
+*   Live, from the API, using [pywikibot](http://www.mediawiki.org/wiki/Manual:Pywikibot/Wikidata)
+
+    *   Read / write
+
+*   Offline, dumps, using Wikidata Toolkit (wdtk)
+
+    *   Newer, shinier, performant Java
+
+            *   [https://www.mediawiki.org/wiki/Wikidata_Toolkit](https://www.mediawiki.org/wiki/Wikidata_Toolkit)
+
+        *   Deprecated, slower, unmaintained python "Wikidata Analyzer"
+
+            *   [https://github.com/mkroetzsch/wda](https://github.com/mkroetzsch/wda)
+
+        *   Read only
+
+*   As linked data, entities, via content negotiation
+
+    *   Read only
+
+### Using Pywikibot:
+
+With pywikibot you get almost full support of the API.
+New classes in the “core” branch
+class WikibasePage(Page):
+class ItemPage(WikibasePage):
+class PropertyPage(WikibasePage):
+class Claim(PropertyPage):
+Using Pywikibot
+Classic pywikibot pagegenerators work.
+#make a generator for all the pages with a property
+en_wikipedia = pywikibot.Site('en', 'wikipedia')
+wikidata = en_wikipedia.data_repository()
+property_page = pywikibot.ItemPage(wikidata, 'Property:P21')
+pages_with_property = property_page.getReferences()
+
+#### Pywikibot example:
+
+I've been harvesting Infobox Book across many languages and writing the corresponding properties to Wikidata [https://github.com/notconfusing/harvest_infobox_book](https://github.com/notconfusing/harvest_infobox_book).
+
+### Using wda
+
+<span style="font-size: 14pt;">Update: WDA is deprecated and replaced by Wikidata Toolkit, which I explain how to use with code examples [in this blog post.](http://notconfusing.com/sex-ratios-in-wikidata-part-iii/ "Sex Ratios in Wikidata Part III")</span>
+
+WDA, WikiData Analytics, downloads the official dump and analyzes it offline. Cleverly it uses nightly incremental dumps after about a 10GB first download. It's also written in python, mainly by Markus Kroetzsch.After downloading there is a parser that writes a file called kb.txt. kb.txt stores plaintext triples, one per line giving you something like this.
+<pre>Q21 link {trwiki:İngiltere} .
+Q21 link {hewiki:אנגליה} .
+Q21 alias {en:ENG} .
+Q21 alias {min:Inggirih} .
+Q21 alias {sgs:England} .
+Q21 P31 Q1763527 .
+Q21 P47 Q22 .
+Q21 P47 Q25 .
+Q21 P41 {Flag of England.svg} .
+
+I used wda to in my analysis of [the most unique Wikipedias according to Wikidata](http://notconfusing.com/the-most-unique-wikipedias-according-to-wikidata/ "The Most Unique Wikipedias According To Wikidata").</pre>
+
+<h3 id="Content-Negotiation"><a href="#Content-Negotiation" class="headerlink" title="Content Negotiation:"></a>Content Negotiation:</h3><p>You can also access Wikidata as linked data. The build path is:</p>
+<pre>https://wikidata.org/entity/&lt;QID&gt;.&lt;format&gt;</pre>
+where your choices of format are
+<pre>nt
+rdf
+ttl</pre>
+Content Negotiaton Example
+<pre>https://www.wikidata.org/wiki/Special:EntityData/Q42046.ttl @prefix entity: &lt;http://www.wikidata.org/entity/&gt; . @prefix wikibase: &lt;http://www.wikidata.org/ontology#&gt; . @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; . @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; . @prefix schema: &lt;http://schema.org/&gt; . @prefix data: &lt;http://www.wikidata.org/wiki/Special:EntityData/&gt; . @prefix cc: &lt;http://creativecommons.org/ns#&gt; . @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .</pre>
+<pre>entity:Q42046
+ a wikibase:Item ;
+ rdfs:label "鬣狗科"@zh, "Hienowate"@pl, "Hiena"@eu, "Hyaenidae"@es, "Hiëna"@af, "Dubuk"@ms, "Hiénafélék"@hu, "Fisi"@sw, "Hüäänlased"@et, "হায়েনা"@bn, "Hiena"@sq, "Hyaenidae"@br, "Ύαινα"@el</pre>
+
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>So until <a href="http://en.wikipedia.org/wiki/Wikidata#Phase_3" target="_blank" rel="external">Phase III</a> there are still some usable options to explore Wikidata for research purposes. However we can still dream of future robust query system. In that dream I like to think of a query system capable of answering “does there exists is a sequence of properties that connects these two Wikidata items?”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/02/3-ways-to-access-wikidata-data-early/" data-id="ciy2b27ft001asmpdba6il1wn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/25/suggestions-of-fake-profiles-in-couchsurfing/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Suggestions of Fake Profiles in Couchsurfing
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/02/how-a-small-bug-i-wrote-started-helping-holocaust-deniers/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How A Small Bug I Wrote Started Helping Holocaust Deniers</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/">Essays</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Hacking/Lesser-Thoughts/Math/">Math</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Icebreakers/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Lesser-Thoughts/PhD/">PhD</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Math/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/PhD/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Podcasts/">Podcasts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Essays/Review/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Lesser-Thoughts/Research-Notes/">Research Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Math/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hacking/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/">Math</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Math/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/PhD/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Lesser-Thoughts/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PhD/Research-Notes/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Research-Notes/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/">Hacking</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Hacking/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/">Icebreakers</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Icebreakers/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/">Iron Blogging</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Lesser-Thoughts/Opinion/">Opinion</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Iron-Blogging/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Math/">Math</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Opinion/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Research-Notes/">Research Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Review/">Review</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Lesser-Thoughts/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/">Opinion</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Opinion/Totally-Inconsequential-Thoughts/Wiki/">Wiki</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/">PhD</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/PhD/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/">Review</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Review/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/">Totally Inconsequential Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Totally-Inconsequential-Thoughts/Yoga/">Yoga</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/Wiki/">Wiki</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/conference/">conference</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/">Lesser Thoughts</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/">Presentations</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/">Research Notes</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/conference/Lesser-Thoughts/Presentations/Research-Notes/Wiki/">Wiki</a></li></ul></li></ul></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiki/">wiki</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/wiki/" style="font-size: 10px;">wiki</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">February 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">October 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">August 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">June 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">January 2012</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">November 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">September 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/03/wikidata-human-gender-indicators-in-the-news/">Wikidata Human Gender Indicators in the News</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/15/so-you-want-to-upload-an-image-to-the-cloud-with-node-js/">So you want to upload an image to the cloud with Node.js</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/08/for-harry-and-carie-on-their-wedding-day/">For Harry and Carie on their Wedding Day</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/25/machine-learning-in-3rd-grade/">Machine Learning in 3rd Grade</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/suggestions-of-fake-profiles-in-couchsurfing/">Suggestions of Fake Profiles in Couchsurfing</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
